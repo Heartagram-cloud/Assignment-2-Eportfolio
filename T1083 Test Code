@@ -1,0 +1,56 @@
+PS C:\Users\vagrant>  $rootPath = "C:\Users\vagrant\Documents"
+>>
+>>   # Define a log file to save the results
+>>   $logFile = "C:\Users\vagrant\Documents\directory_discoveryTest.log"
+>>
+>>   # Function to log the results
+>>   function Log-Result {
+>>       param (
+>>           [string]$message
+>>       )
+>>       Add-Content -Path $logFile -Value $message
+>>   }
+>>
+>>   # Check if log file exists; if not, create it
+>>   if (-not (Test-Path -Path $logFile)) {
+>>       New-Item -Path $logFile -ItemType File -Force
+>>   }
+>>
+>>   # Get all directories and files from the root path recursively
+>>   function Discover-Items {
+>>       param (
+>>           [string]$path
+>>       )
+>>
+>>       try {
+>>           # Enumerate directories
+>>           $directories = Get-ChildItem -Path $path -Directory -ErrorAction Stop
+>>           foreach ($dir in $directories) {
+>>               Log-Result "Directory: $($dir.FullName)"
+>>               Discover-Items -path $dir.FullName
+>>           }
+>>
+>>           # Enumerate files
+>>           $files = Get-ChildItem -Path $path -File -ErrorAction Stop
+>>           foreach ($file in $files) {
+>>               Log-Result "File: $($file.FullName)"
+>>           }
+>>       } catch {
+>>           Log-Result "Error accessing: $path - $_"
+>>       }
+>>   }
+>>
+>>   # Start the discovery from the root path
+>>   Discover-Items -path $rootPath
+>>
+>>   Write-Output "Directory and file discovery completed. Results logged to $logFile"
+>>
+
+
+    Directory: C:\Users\vagrant\Documents
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         9/15/2024   7:10 PM              0 directory_discoveryTest.log
+Directory and file discovery completed. Results logged to C:\Users\vagrant\Documents\directory_discoveryTest.log
