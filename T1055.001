@@ -1,0 +1,27 @@
+PS C:\Users\vagrant>  # Define a directory to list files from
+>>  $directoryPath = "C:\Users\Public\Documents"
+>>
+>>  # List all files in the specified directory
+>>  Get-ChildItem -Path $directoryPath | ForEach-Object {
+>>      Write-Output "File: $($_.Name)"
+>>
+>>      # Optionally, read the contents of each file (if it's a text file)
+>>      if ($_.Extension -eq ".txt") {
+>>          $fileContent = Get-Content -Path $_.FullName
+>>          Write-Output "Content of $($_.Name):"
+>>          Write-Output $fileContent
+>>      }
+>>  }
+PS C:\Users\vagrant> Get-ChildItem -Path "C:\Users\vagrant\Documents\" | ForEach-Object {
+>>     Write-Output "File: $($_.Name)"
+>>
+>>     # Optionally, read the contents of each file (if it's a text file)
+>>     if ($_.Extension -eq ".txt") {
+>>         $fileContent = Get-Content -Path $_.FullName
+>>         Write-Output "Content of $($_.Name):"
+>>         Write-Output $fileContent
+>>     }
+>> }
+>>
+File: Test Folder
+File: WindowsPowerShell
