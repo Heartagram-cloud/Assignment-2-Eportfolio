@@ -1,0 +1,22 @@
+PS C:\Users\vagrant> # This script changes the password of a local user account.
+>> # WARNING: Use this script only in a test environment.
+>>
+>> # Define the local username and new password
+>> $username = "Vagrant"  # Replace with the target local username
+>> $newPassword = "NewP@ssw0rd!"  # Replace with the new password
+>>
+>> # Check if the username exists
+>> $userExists = Get-LocalUser -Name $username -ErrorAction SilentlyContinue
+>>
+>> if ($userExists) {
+>>     # Change the password
+>>     try {
+>>         Set-LocalUser -Name $username -Password (ConvertTo-SecureString $newPassword -AsPlainText -Force)
+>>         Write-Host "Password for user '$username' has been successfully changed."
+>>     } catch {
+>>         Write-Host "Failed to change the password. Error: $_"
+>>     }
+>> } else {
+>>     Write-Host "User '$username' does not exist."
+>> }
+>>
