@@ -1,0 +1,21 @@
+Get-WinEvent -LogName 'Microsoft-Windows-Sysmon/Operational' -MaxEvents 10 | Format-List
+
+
+
+TimeCreated  : 9/15/2024 6:02:11 PM
+ProviderName : Microsoft-Windows-Sysmon
+Id           : 10
+Message      : Process accessed:
+               RuleName: technique_id=T1055.001,technique_name=Dynamic-link Library Injection
+               UtcTime: 2024-09-15 08:02:11.664
+               SourceProcessGUID: {8a79a039-9482-66e6-3701-000000001b00}
+               SourceProcessId: 6020
+               SourceThreadId: 5840
+               SourceImage: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+               TargetProcessGUID: {8a79a039-9483-66e6-3b01-000000001b00}
+               TargetProcessId: 3504
+               TargetImage: C:\Windows\system32\HOSTNAME.EXE
+               GrantedAccess: 0x1FFFFF
+               CallTrace: C:\Windows\SYSTEM32\ntdll.dll+a1b64|C:\Windows\System32\KERNELBASE.dll+515a8|C:\Windows\System32\KERNELBASE.dll+88616|C:\Windows\System32\KERNEL32.DLL+1ca94|UNKNOWN(00007FFA9A45B8E0)
+               SourceUser: DC\vagrant
+               TargetUser: DC\vagrant
