@@ -1,0 +1,10 @@
+Loading personal and system profiles took 1734ms.
+PS C:\Users\vagrant> Get-WinEvent -LogName 'Microsoft-Windows-Sysmon/Operational' |
+>>     Where-Object { $_.Message -like "*T1059*" -or
+>>                     $_.Message -like "*T1053.005*" -or
+>>                     $_.Message -like "*T1204*" -or
+>>                     $_.Message -like "*T1047*" } |
+>>     Sort-Object TimeCreated -Descending |
+>>     Select-Object -First 10 |
+>>     Format-List -Property Message
+>>
